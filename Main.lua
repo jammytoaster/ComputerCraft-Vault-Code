@@ -1,7 +1,7 @@
 local monitor = peripheral.wrap("monitor_0") -- Allows for ComputerCraft computer to access monitor
 
 
-local function writeCentered(text, y, size) -- Adds text to center by getting size of window and placing it in the center, Size of text is done first to account for change in text size in comparison to the window size preventing overflow
+local function writeCentered(text, y, size) -- Adds text to the center by getting the size of the window and placing it in the center, Size of text is done first to account for the change in text size in comparison to the window size preventing overflow
   monitor.setTextScale(size)
   local X = term.getSize()
   local centerXPos = (x - string.len(text)) / 2
@@ -39,7 +39,7 @@ function writeButton() -- Writes the buttons using input x and y positioning
 
 
 function door() -- Uses a wireless modem in ComputerCraft to send a signal to a receiver computer telling it to open the vault doors using redstone
-  local compID1 = 1
+  local compID1 = 1 -- CompID must match the ID of the receiving computer
   local compID2 = 2
 
   rednet.open("back")
