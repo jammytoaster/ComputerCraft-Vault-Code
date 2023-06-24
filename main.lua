@@ -48,7 +48,7 @@ function door() -- Uses a wireless modem in ComputerCraft to send a signal to a 
   rednet.send(compID2, "REDSTONE")
 end
 
-function launchTheme
+function launchTheme()
   local dfpwm = require("cc.audio.dfpwm")
   local speaker = peripheral.find("speaker")
   local decoder = dfpwm.make_decoder()
@@ -63,10 +63,11 @@ function launchTheme
   handle.close()
 end
 
-function launchSequence -- Gives the user a countdown for their rocket launch. Could clean up using a for loop
+function launchSequence() -- Gives the user a countdown for their rocket launch. Could clean up using a for loop
   writeCentered("Please enter your rocket!", 4, 2)
   door()
-  sleep(5)
+  launchTheme()
+  sleep(7)
   term.clear()
   writeCentered("Press space!", 4, 2)
   sleep(1)
