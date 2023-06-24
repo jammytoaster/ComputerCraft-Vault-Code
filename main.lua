@@ -48,6 +48,20 @@ function door() -- Uses a wireless modem in ComputerCraft to send a signal to a 
   rednet.send(compID2, "REDSTONE")
 end
 
+function launchTheme
+  local dfpwm = require("cc.audio.dfpwm")
+  local speaker = peripheral.find("speaker")
+  local decoder = dfpwm.make_decoder()
+  local handle = assert(http.get("https://github.com/jammytoaster/ComputerCraft-Vault-Code/raw/main/Thunderbirds%20Theme%20CC.dfpwm", nil, true))
+
+  for chunk in handle.read, 16*1024 do
+    local buffer = decoder(chunk)
+    while not speaker.playAudio(buffer, 10) do
+      os.pullEvent("speaker_audio_empty")
+    end
+  end
+  handle.close()
+end
 
 function launchSequence -- Gives the user a countdown for their rocket launch. Could clean up using a for loop
   writeCentered("Please enter your rocket!", 4, 2)
@@ -57,36 +71,11 @@ function launchSequence -- Gives the user a countdown for their rocket launch. C
   writeCentered("Press space!", 4, 2)
   sleep(1)
   term.clear()
-  writeCentered("10", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("9", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("8", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("7", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("6", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("5", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("4", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("3", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("2", 4, 2)
-  sleep(1)
-  term.clear()
-  writeCentered("1", 4, 2)
-  sleep(1)
-  term.clear()
+  for i = 1, 10, 1 do
+    writeCentered(i, 4, 2)
+    sleep(1)
+    term.clear()
+  end
   writeCentered("LIFT OFF!", 4, 2)
   sleep(4)
 end
